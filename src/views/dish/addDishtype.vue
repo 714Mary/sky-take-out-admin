@@ -33,6 +33,18 @@
             <el-input v-model="ruleForm.price"
                       placeholder="请设置菜品价格" />
           </el-form-item>
+          <!-- 库存预警新增 -->
+          <el-form-item label="当前库存:"
+                        prop="stock">
+            <el-input v-model="ruleForm.stock"
+                      placeholder="请设置菜品库存" />
+          </el-form-item>
+          <el-form-item label="预警阈值:"
+                        prop="minStock">
+            <el-input v-model="ruleForm.minStock"
+                      placeholder="库存低于此值时预警" />
+          </el-form-item>
+
         </div>
         <el-form-item label="口味做法配置:">
           <el-form-item>
@@ -169,7 +181,9 @@ export default class extends Vue {
     description: '',
     dishFlavors: [],
     status: true,
-    categoryId: ''
+    categoryId: '',
+    stock: 50,       // ← 加
+    minStock: 10     // ← 加
   }
 
   get rules() {
@@ -379,7 +393,9 @@ export default class extends Vue {
                     description: '',
                     dishFlavors: [],
                     status: true,
-                    categoryId: ''
+                    categoryId: '',
+                    stock: 50,
+                    minStock: 10
                   }
                   this.restKey++
                 }

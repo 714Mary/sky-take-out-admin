@@ -84,6 +84,25 @@
             <span style="margin-right: 10px">￥{{ (scope.row.price ).toFixed(2)*100/100 }}</span>
           </template>
         </el-table-column>
+
+
+        <!-- 库存预警新增列 -->
+        <el-table-column label="当前库存"
+                         width="110">
+          <template slot-scope="scope">
+            <span :class="{ 'stock-warn': scope.row.stock <= scope.row.minStock }">
+              {{ scope.row.stock || 0 }}
+            </span>
+          </template>
+        </el-table-column>
+        <el-table-column label="预警阈值"
+                         width="100">
+          <template slot-scope="scope">
+            {{ scope.row.minStock || 0 }}
+          </template>
+        </el-table-column>
+
+
         <el-table-column label="售卖状态">
           <template slot-scope="scope">
             <div class="tableColumn-status"
@@ -371,6 +390,11 @@ export default class extends Vue {
       .pageList {
         text-align: center;
         margin-top: 30px;
+      }
+      /* 库存预警：库存不足时数字变红加粗 */
+      .stock-warn {
+        color: #f56c6c;
+        font-weight: bold;
       }
     }
   }
