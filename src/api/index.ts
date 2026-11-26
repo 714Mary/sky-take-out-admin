@@ -95,3 +95,11 @@ request({
       responseType: "blob"
     })
   }
+
+  // 员工绩效统计（创新点3）
+  export const getEmployeePerformance = (params: any) =>
+    request({
+      url: `/report/employeePerformance`,
+      method: 'get',
+      params
+    })

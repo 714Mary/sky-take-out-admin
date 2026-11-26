@@ -1,4 +1,4 @@
-<template>
+OK<template>
   <div class="dashboard-container home">
     <!-- 标题 -->
     <TitleIndex @sendTitleInd="getTitleNum" :flag="flag" :tateData="tateData" />
@@ -19,6 +19,8 @@
       <Top :top10data="top10Data" />
       <!-- end -->
     </div>
+    <!-- 员工绩效统计（创新点3） -->
+    <EmployeePerformance ref="employeePerformance" />
   </div>
 </template>
 
@@ -49,6 +51,8 @@ import UserStatistics from './components/userStatistics.vue'
 import OrderStatistics from './components/orderStatistics.vue'
 // 排名
 import Top from './components/top10.vue'
+// 员工绩效统计（创新点3）
+import EmployeePerformance from './components/employeePerformance.vue'
 @Component({
   name: 'Dashboard',
   components: {
@@ -57,6 +61,7 @@ import Top from './components/top10.vue'
     UserStatistics,
     OrderStatistics,
     Top,
+    EmployeePerformance,
   },
 })
 export default class extends Vue {
@@ -80,6 +85,9 @@ export default class extends Vue {
       this.getUserStatisticsData(begin,end)
       this.getOrderStatisticsData(begin,end)
       this.getTopData(begin,end)
+      // 员工绩效统计（创新点3）
+      const ep = this.$refs.employeePerformance as any
+      if (ep) ep.loadData(begin, end)
     })
   }
 
